@@ -1,0 +1,2 @@
+metric_date,total_customer_cnt,active_customer_cnt_30d,high_risk_customer_cnt,abnormal_txn_cnt,total_txn_cnt,abnormal_txn_rate,overdue_customer_rate,quality_pass_cnt,quality_check_cnt
+2026-06-14,12,12,1,5,24,0.2083,0.4167,4,4

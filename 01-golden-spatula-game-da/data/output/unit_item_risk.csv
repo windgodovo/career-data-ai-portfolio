@@ -1,0 +1,7 @@
+patch_version,unit_id,unit_name,cost,item_combo,appear_cnt,top4_rate,win_rate,avg_rank,balance_note,balance_flag
+S11.4,U_AP_CARRY,法系主C,4,蓝霸符+法爆+科技枪,4200,0.612,0.174,3.71,核心装备绑定偏强,overpowered_item_binding
+S11.4,U_XAYAH,霞,4,羊刀+无尽+轻语,3900,0.594,0.166,3.83,新版本环境受益,overpowered_item_binding
+S11.4,U_SAMIRA,莎弥拉,3,无尽+正义+巨杀,3100,0.586,0.161,3.94,中费赌狗回暖,normal
+S11.4,U_MECHA_TANK,机甲前排,4,狂徒+反甲+龙牙,3500,0.561,0.148,4.06,稳定前排,normal
+S11.4,U_NOVA_5C,新星五费,5,青龙刀+帽子+大天使,2800,0.537,0.134,4.28,热度下降,normal
+S11.4,U_DARKSTAR,暗星核心,4,饮血+泰坦+夜刃,1800,0.474,0.103,5.08,补丁后偏弱,underpowered_core

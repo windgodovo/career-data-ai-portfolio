@@ -1,0 +1,13 @@
+customer_id,name,age,city,occupation,open_date,kyc_level
+C001,Li Wei,34,Shanghai,Software Engineer,2021-03-12,verified
+C002,Wang Fang,47,Hangzhou,Restaurant Owner,2019-11-05,verified
+C003,Zhang Min,26,Shenzhen,Freelancer,2023-08-20,basic
+C004,Chen Hao,39,Guangzhou,Trader,2020-06-18,verified
+C005,Liu Yan,52,Beijing,Corporate Manager,2018-02-01,verified
+C006,Zhao Lei,23,Chengdu,Student,2024-01-15,basic
+C007,Sun Jie,45,Ningbo,Import Export Merchant,2017-09-09,verified
+C008,Huang Rui,31,Suzhou,Sales Manager,2022-04-22,verified
+C009,Lin Yue,29,Xiamen,Designer,2021-12-03,basic
+C010,He Qiang,58,Jinan,Retired,2016-07-30,verified
+C011,Ma Ning,36,Shanghai,Ecommerce Seller,2020-10-11,verified
+C012,Tang Xin,41,Hangzhou,Consultant,2019-05-19,verified

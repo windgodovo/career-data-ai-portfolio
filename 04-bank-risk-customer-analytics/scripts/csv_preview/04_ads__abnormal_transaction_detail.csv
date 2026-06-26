@@ -1,0 +1,6 @@
+txn_id,customer_id,account_id,amount,txn_time,channel,txn_type,txn_status,abnormal_reason,severity
+T0024,C003,A1003,12000.0,2026-06-14 02:40:00,online,transfer,SUCCESS,unusual_channel,low
+T0021,C011,A1011,26000.0,2026-06-11 23:15:00,mobile,transfer,SUCCESS,high_frequency,medium
+T0020,C011,A1011,24000.0,2026-06-11 23:08:00,mobile,transfer,SUCCESS,high_frequency,medium
+T0019,C011,A1011,22000.0,2026-06-11 23:01:00,mobile,transfer,SUCCESS,high_frequency,medium
+T0012,C006,A1006,2700.0,2026-06-08 00:25:00,mobile,transfer,FAILED,failed_large_txn,low

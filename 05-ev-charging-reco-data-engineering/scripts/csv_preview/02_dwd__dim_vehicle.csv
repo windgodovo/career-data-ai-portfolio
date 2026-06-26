@@ -1,0 +1,6 @@
+vehicle_id,user_id,home_zone,battery_kwh,preferred_power_type
+V001,U001,Zone_A,72.0,DC_FAST
+V002,U002,Zone_B,65.0,AC_SLOW
+V003,U003,Zone_A,80.0,DC_FAST
+V004,U004,Zone_C,55.0,AC_SLOW
+V005,U005,Zone_B,90.0,DC_FAST

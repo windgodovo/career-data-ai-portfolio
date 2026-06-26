@@ -1,0 +1,7 @@
+cluster_type,cluster_key,user_cnt,report_cnt,punish_cnt,punished_user_cnt,punish_user_rate
+ip,10.0.9.9,3,6,6,3,1.0
+payment_subject,PS900,3,6,6,3,1.0
+device,D900,3,6,6,3,1.0
+payment_subject,PS003,2,2,2,2,1.0
+payment_subject,PS002,3,2,2,2,0.6667
+ip,10.0.0.3,2,1,1,1,0.5

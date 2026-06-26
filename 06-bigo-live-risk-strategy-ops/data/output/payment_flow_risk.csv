@@ -1,0 +1,4 @@
+payment_subject,payer_cnt,receiver_cnt,order_cnt,amount_sum,refund_rate
+PS002,2,1,2,228.0,1.0
+PS003,1,1,1,199.0,1.0
+PS900,3,1,3,1197.0,1.0

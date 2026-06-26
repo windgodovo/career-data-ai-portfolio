@@ -1,0 +1,4 @@
+check_item,check_result,detail
+dwd.fact_charge_order row_count > 0,PASS,8
+dwd.fact_charge_order key not null,PASS,0
+serving.charge_reco_topn each vehicle has 3 rows,PASS,"min=3, max=3"

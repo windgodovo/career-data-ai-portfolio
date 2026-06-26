@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAG 知识库问答</title>
+    <link rel="stylesheet" href="/ui/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>AI Knowledge Base RAG</h1>
+        <p>基于文档证据的问答系统（含引用和置信度）</p>
+      </header>
+
+      <section class="ask-box">
+        <textarea id="question" placeholder="输入你的问题，例如：年假有多少天？"></textarea>
+        <div class="row">
+          <input id="owner" placeholder="owner (可选，如 demo-team)" />
+          <input id="confidentiality" placeholder="confidentiality (可选，如 internal)" />
+          <label style="display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:14px;color:#39505b;">
+            <input id="useWeb" type="checkbox" /> 联网补充
+          </label>
+          <button id="askBtn">提问</button>
+        </div>
+      </section>
+
+      <section class="result-box">
+        <h2>回答</h2>
+        <div id="thinkingPanel" class="thinking-panel hidden" aria-live="polite">
+          <div class="thinking-head">
+            <strong id="progressLabel">准备中...</strong>
+            <span id="progressPct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+          <ul id="thinkingSteps" class="thinking-steps">
+            <li data-step="0">解析问题与改写检索语句</li>
+            <li data-step="1">检索本地证据并重排</li>
+            <li data-step="2">调用 LLM 生成回答</li>
+            <li data-step="3">整理引用与质量检查</li>
+          </ul>
+        </div>
+        <pre id="answer">等待提问...</pre>
+        <div id="meta"></div>
+      </section>
+
+      <section class="result-box">
+        <h2>引用</h2>
+        <ul id="citations"></ul>
+      </section>
+    </main>
+
+    <script src="/ui/app.js"></script>
+  </body>
+</html>

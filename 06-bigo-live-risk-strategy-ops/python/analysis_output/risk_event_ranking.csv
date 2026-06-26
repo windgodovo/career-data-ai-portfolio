@@ -1,0 +1,9 @@
+case_id,target_id,risk_level,risk_score,review_result,appeal_result,root_cause,report_cnt_all,private_message_cnt,device_user_cnt,payment_amount_sum
+C004,U009,high,76.25,violation,upheld,cluster_abuse,2,3,3,1197.0
+C006,U011,high,75.0,violation,upheld,cluster_abuse,2,3,3,499.0
+C005,U010,high,73.75,violation,upheld,cluster_abuse,2,3,3,399.0
+C003,U006,medium,38.75,violation,upheld,single_case_review,1,2,1,199.0
+C002,U004,medium,36.88,violation,not_appealed,single_case_review,1,2,1,129.0
+C001,U002,medium,35.62,violation,not_appealed,single_case_review,1,2,1,99.0
+C007,U005,low,15.62,suspicious,overturned,possible_false_positive,1,0,1,199.0
+C008,U001,low,8.12,normal,not_appealed,single_case_review,0,0,1,19.9

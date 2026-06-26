@@ -1,0 +1,6 @@
+station_id,station_zone,available_ports,completed_orders_7d,online_rate,queue_minutes,fault_count,station_operability_score
+S001,Zone_A,12,2,0.98,6,0,0.931
+S002,Zone_B,20,2,0.96,12,1,0.812
+S003,Zone_A,16,1,0.99,4,0,0.9555
+S004,Zone_C,10,1,0.93,18,2,0.6885
+S005,Zone_B,14,2,0.97,8,0,0.9065

@@ -1,0 +1,6 @@
+station_id,station_name,zone,power_type,available_ports,tariff_cny_per_kwh
+S001,Alpha Station,Zone_A,DC_FAST,12,1.55
+S002,Beta Station,Zone_B,AC_SLOW,20,1.20
+S003,Gamma Station,Zone_A,AC_SLOW,16,1.10
+S004,Delta Station,Zone_C,DC_FAST,10,1.68
+S005,Echo Station,Zone_B,DC_FAST,14,1.42

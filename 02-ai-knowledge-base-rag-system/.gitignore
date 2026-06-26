@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Build/test caches
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE/OS
+.DS_Store
+.vscode/
+.idea/
+.cursorignore
+.cursorindexingignore
+
+# Runtime data and logs
+*.log
+*.pid
+
+# RAG runtime artifacts
+data/chroma/*
+!data/chroma/.gitkeep
+
+data/ads/*
+!data/ads/.gitkeep
+
+data/dwd_chunks/chunks_preview.json

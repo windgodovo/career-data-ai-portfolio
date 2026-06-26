@@ -1,0 +1,2 @@
+customer_id,name,city,risk_score,risk_level,credit_utilization_rate,max_dpd_days_12m,night_txn_cnt_30d,failed_txn_cnt_30d
+C004,Chen Hao,Guangzhou,77.56,high,0.9875,40,2.0,0.0

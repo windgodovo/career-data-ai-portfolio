@@ -1,0 +1,11 @@
+punish_id,user_id,punish_time,risk_type,punish_type,duration_hours
+PN001,U002,2026-06-21 12:00:00,inducement,warning,0
+PN002,U004,2026-06-21 12:10:00,inducement,mute,24
+PN003,U006,2026-06-21 12:15:00,fraud,mute,24
+PN004,U009,2026-06-21 12:20:00,inducement,ban,168
+PN005,U010,2026-06-21 12:25:00,inducement,ban,168
+PN006,U011,2026-06-21 12:30:00,fraud,ban,720
+PN007,U009,2026-06-22 13:00:00,fraud,ban,720
+PN008,U010,2026-06-22 13:10:00,fraud,mute,72
+PN009,U011,2026-06-22 13:20:00,fraud,mute,72
+PN010,U005,2026-06-23 11:00:00,scam,warning,0

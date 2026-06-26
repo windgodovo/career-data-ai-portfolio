@@ -1,0 +1,25 @@
+message_id,user_id,room_id,content,send_time,message_type
+M0001,U001,R01,hello everyone,2026-06-21 09:00:00,public_chat
+M0002,U002,R01,join my group 8899,2026-06-21 09:02:00,private_message
+M0003,U003,R02,welcome to my room,2026-06-21 09:03:00,public_chat
+M0004,U004,R02,join my group 8899,2026-06-21 09:05:00,private_message
+M0005,U005,R03,big reward click link,2026-06-21 09:08:00,public_chat
+M0006,U006,R03,join my group 8899,2026-06-21 09:10:00,private_message
+M0007,U007,R04,normal chat today,2026-06-21 09:12:00,voice_transcript
+M0008,U008,R04,join my group 8899,2026-06-21 09:13:00,private_message
+M0009,U009,R09,join my group 8899,2026-06-21 09:15:00,private_message
+M0010,U010,R09,join my group 8899,2026-06-21 09:16:00,private_message
+M0011,U011,R09,join my group 8899,2026-06-21 09:17:00,private_message
+M0012,U012,R12,thanks for watching,2026-06-21 09:20:00,public_chat
+M0013,U009,R09,join my group 8899,2026-06-22 10:01:00,private_message
+M0014,U010,R09,join my group 8899,2026-06-22 10:02:00,private_message
+M0015,U011,R09,join my group 8899,2026-06-22 10:03:00,private_message
+M0016,U002,R01,join my group 8899,2026-06-22 10:04:00,private_message
+M0017,U004,R02,join my group 8899,2026-06-22 10:05:00,private_message
+M0018,U006,R03,join my group 8899,2026-06-22 10:06:00,private_message
+M0019,U001,R01,morning all,2026-06-23 08:11:00,public_chat
+M0020,U003,R02,live now,2026-06-23 08:21:00,public_chat
+M0021,U005,R03,limited offer now,2026-06-23 08:31:00,public_chat
+M0022,U009,R09,join my group 8899,2026-06-23 08:41:00,private_message
+M0023,U010,R09,join my group 8899,2026-06-23 08:51:00,private_message
+M0024,U011,R09,join my group 8899,2026-06-23 09:01:00,private_message

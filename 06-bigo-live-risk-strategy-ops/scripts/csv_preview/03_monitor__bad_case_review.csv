@@ -1,0 +1,9 @@
+case_id,target_id,review_time,review_result,appeal_result,report_cnt_all,private_message_cnt,device_user_cnt,payment_amount_sum,root_cause
+C008,U001,2026-06-23 10:30:00,normal,not_appealed,0,0,1,19.9,single_case_review
+C007,U005,2026-06-23 10:20:00,suspicious,overturned,1,0,1,199.0,possible_false_positive
+C006,U011,2026-06-21 12:00:00,violation,upheld,2,3,3,499.0,cluster_abuse
+C005,U010,2026-06-21 11:55:00,violation,upheld,2,3,3,399.0,cluster_abuse
+C004,U009,2026-06-21 11:50:00,violation,upheld,2,3,3,1197.0,cluster_abuse
+C003,U006,2026-06-21 11:40:00,violation,upheld,1,2,1,199.0,single_case_review
+C002,U004,2026-06-21 11:35:00,violation,not_appealed,1,2,1,129.0,single_case_review
+C001,U002,2026-06-21 11:30:00,violation,not_appealed,1,2,1,99.0,single_case_review

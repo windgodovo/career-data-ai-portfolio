@@ -1,0 +1,13 @@
+customer_id,name,city,customer_segment,value_score,active_score,risk_score,risk_level
+C006,Zhao Lei,Chengdu,general_customer,10.6,10.0,59.1,medium
+C002,Wang Fang,Hangzhou,general_customer,100.0,10.0,48.83,medium
+C007,Sun Jie,Ningbo,general_customer,100.0,10.0,48.75,medium
+C009,Lin Yue,Xiamen,general_customer,19.6,5.0,47.57,medium
+C003,Zhang Min,Shenzhen,general_customer,41.4,15.0,47.04,medium
+C011,Ma Ning,Shanghai,general_customer,100.0,15.0,43.39,medium
+C012,Tang Xin,Hangzhou,general_customer,8.0,10.0,10.5,low
+C008,Huang Rui,Suzhou,general_customer,8.04,10.0,9.92,low
+C001,Li Wei,Shanghai,general_customer,2.57,10.0,9.8,low
+C005,Liu Yan,Beijing,general_customer,34.6,10.0,8.4,low
+C010,He Qiang,Jinan,general_customer,10.0,5.0,5.25,low
+C004,Chen Hao,Guangzhou,high_value_high_risk,100.0,10.0,77.56,high

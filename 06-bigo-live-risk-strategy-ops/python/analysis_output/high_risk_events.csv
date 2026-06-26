@@ -1,0 +1,4 @@
+case_id,target_id,risk_level,risk_score,review_result,appeal_result,root_cause,report_cnt_all,private_message_cnt,device_user_cnt,payment_amount_sum
+C004,U009,high,76.25,violation,upheld,cluster_abuse,2,3,3,1197.0
+C006,U011,high,75.0,violation,upheld,cluster_abuse,2,3,3,499.0
+C005,U010,high,73.75,violation,upheld,cluster_abuse,2,3,3,399.0

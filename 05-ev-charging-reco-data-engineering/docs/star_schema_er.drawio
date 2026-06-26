@@ -1,0 +1,54 @@
+<mxfile host="app.diagrams.net" modified="2026-06-23T10:00:00.000Z" agent="GitHub Copilot" version="24.7.17" editor="www.diagrams.net" type="device">
+  <diagram id="dwd-er-ev" name="DWD ER">
+    <mxGraphModel dx="1280" dy="720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="&lt;b&gt;EV Charging Recommendation - DWD Layer ER Diagram&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="30" width="860" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dim_vehicle" value="&lt;b&gt;dwd.dim_vehicle&lt;/b&gt;&lt;br&gt;PK: vehicle_id&lt;br&gt;user_id&lt;br&gt;home_zone&lt;br&gt;battery_kwh&lt;br&gt;preferred_power_type" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="120" y="170" width="330" height="180" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dim_station" value="&lt;b&gt;dwd.dim_station&lt;/b&gt;&lt;br&gt;PK: station_id&lt;br&gt;station_name&lt;br&gt;station_zone&lt;br&gt;power_type&lt;br&gt;available_ports&lt;br&gt;tariff_cny_per_kwh" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="170" width="350" height="210" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="fact_order" value="&lt;b&gt;dwd.fact_charge_order&lt;/b&gt;&lt;br&gt;PK: order_id&lt;br&gt;FK: vehicle_id&lt;br&gt;FK: station_id&lt;br&gt;start_time&lt;br&gt;end_time&lt;br&gt;energy_kwh&lt;br&gt;status&lt;br&gt;charge_minutes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="680" y="260" width="400" height="260" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="fact_payment" value="&lt;b&gt;dwd.fact_payment&lt;/b&gt;&lt;br&gt;PK: payment_id&lt;br&gt;FK: order_id&lt;br&gt;amount_cny&lt;br&gt;pay_time&lt;br&gt;pay_method&lt;br&gt;is_success" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="680" y="690" width="360" height="210" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="fact_ops" value="&lt;b&gt;dwd.fact_station_ops&lt;/b&gt;&lt;br&gt;FK: station_id&lt;br&gt;snapshot_time&lt;br&gt;online_rate&lt;br&gt;queue_minutes&lt;br&gt;fault_count" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="690" width="350" height="190" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="legend" value="&lt;b&gt;Legend&lt;/b&gt;&lt;br&gt;Blue: dimension table&lt;br&gt;Orange: charge order fact&lt;br&gt;Yellow: related operational/payment facts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="120" y="740" width="330" height="130" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e_vehicle_order" value="vehicle_id" style="endArrow=block;endFill=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;" edge="1" parent="1" source="fact_order" target="dim_vehicle">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e_station_order" value="station_id" style="endArrow=block;endFill=1;html=1;strokeWidth=2;strokeColor=#6c8ebf;" edge="1" parent="1" source="fact_order" target="dim_station">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e_payment_order" value="order_id" style="endArrow=block;endFill=1;html=1;strokeWidth=2;strokeColor=#d79b00;" edge="1" parent="1" source="fact_payment" target="fact_order">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e_ops_station" value="station_id" style="endArrow=block;endFill=1;html=1;strokeWidth=2;strokeColor=#d79b00;" edge="1" parent="1" source="fact_ops" target="dim_station">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

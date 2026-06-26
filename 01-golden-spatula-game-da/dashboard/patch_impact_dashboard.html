@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>金铲铲补丁影响看板</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { --bg:#f6f8fb; --panel:#fff; --line:#d9e1ee; --text:#172033; --muted:#667085; --blue:#2f6fed; --green:#1f9d68; --red:#d64545; --amber:#d98a10; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); }
+    header { background:var(--panel); border-bottom:1px solid var(--line); padding:20px 28px 12px; }
+    h1 { margin:0; font-size:22px; letter-spacing:0; }
+    .sub { margin-top:6px; color:var(--muted); font-size:13px; }
+    main { padding:20px 28px 28px; display:grid; gap:18px; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start; }
+    .section { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .section h2 { margin:0 0 12px; font-size:16px; }
+    canvas { width:100%; height:340px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { padding:9px 8px; border-bottom:1px solid var(--line); text-align:left; }
+    th { color:var(--muted); font-weight:600; }
+    .pos { color:var(--green); font-weight:700; }
+    .neg { color:var(--red); font-weight:700; }
+    .tag { display:inline-block; padding:2px 7px; border-radius:999px; font-size:12px; border:1px solid var(--line); }
+    .buff_effective,.meta_rising { background:#eaf8f0; color:var(--green); border-color:#a9dfc1; }
+    .nerf_effective { background:#fff1f1; color:var(--red); border-color:#f4b8b8; }
+    .watch { background:#f8fafc; color:var(--muted); }
+    @media (max-width:900px) { .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>金铲铲补丁影响看板</h1>
+    <div class="sub">对比补丁前后阵容强度、出场量和玩家迁移，帮助判断削弱、增强或继续观察。</div>
+  </header>
+  <main>
+    <section class="grid">
+      <div class="section">
+        <h2>前四率变化</h2>
+        <canvas id="top4DeltaChart"></canvas>
+      </div>
+      <div class="section">
+        <h2>登顶率变化</h2>
+        <canvas id="winDeltaChart"></canvas>
+      </div>
+    </section>
+    <section class="section">
+      <h2>补丁影响判读</h2>
+      <table id="deltaTable">
+        <thead><tr><th>阵容</th><th>出场变化</th><th>前四率变化</th><th>登顶率变化</th><th>平均名次变化</th><th>判断</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+    <section class="grid">
+      <div class="section">
+        <h2>玩家迁移流向</h2>
+        <canvas id="migrationChart"></canvas>
+      </div>
+      <div class="section">
+        <h2>棋子 / 装备风险</h2>
+        <table id="unitTable">
+          <thead><tr><th>棋子</th><th>装备</th><th>出场</th><th>前四率</th><th>登顶率</th><th>标签</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script>
+    const parseCsv = text => {
+      const lines = text.trim().split(/\r?\n/);
+      const headers = lines.shift().split(',');
+      return lines.map(line => {
+        const values = line.split(',');
+        return Object.fromEntries(headers.map((h, i) => [h, values[i]]));
+      });
+    };
+    const pct = value => `${(Number(value) * 100).toFixed(1)}%`;
+    const signedPct = value => `${Number(value) >= 0 ? '+' : ''}${(Number(value) * 100).toFixed(1)}pp`;
+    const signed = value => `${Number(value) >= 0 ? '+' : ''}${Number(value).toLocaleString('zh-CN')}`;
+    const cls = value => Number(value) >= 0 ? 'pos' : 'neg';
+
+    Promise.all([
+      fetch('../data/output/patch_delta_summary.csv').then(r => r.text()).then(parseCsv),
+      fetch('../data/output/meta_migration_summary.csv').then(r => r.text()).then(parseCsv),
+      fetch('../data/output/unit_item_risk.csv').then(r => r.text()).then(parseCsv)
+    ]).then(([delta, migration, unit]) => {
+      const labels = delta.map(row => row.comp_name);
+      new Chart(document.getElementById('top4DeltaChart'), {
+        type: 'bar',
+        data: { labels, datasets: [{ label: '前四率变化', data: delta.map(row => Number(row.top4_delta)), backgroundColor: delta.map(row => Number(row.top4_delta) >= 0 ? '#1f9d68' : '#d64545') }] },
+        options: { scales: { y: { ticks: { callback: v => `${(v * 100).toFixed(0)}pp` } } } }
+      });
+      new Chart(document.getElementById('winDeltaChart'), {
+        type: 'bar',
+        data: { labels, datasets: [{ label: '登顶率变化', data: delta.map(row => Number(row.win_delta)), backgroundColor: delta.map(row => Number(row.win_delta) >= 0 ? '#2f6fed' : '#d64545') }] },
+        options: { scales: { y: { ticks: { callback: v => `${(v * 100).toFixed(0)}pp` } } } }
+      });
+      document.querySelector('#deltaTable tbody').innerHTML = delta.map(row => `
+        <tr>
+          <td>${row.comp_name}</td>
+          <td class="${cls(row.play_delta)}">${signed(row.play_delta)}</td>
+          <td class="${cls(row.top4_delta)}">${signedPct(row.top4_delta)}</td>
+          <td class="${cls(row.win_delta)}">${signedPct(row.win_delta)}</td>
+          <td class="${Number(row.avg_rank_delta) <= 0 ? 'pos' : 'neg'}">${Number(row.avg_rank_delta) >= 0 ? '+' : ''}${Number(row.avg_rank_delta).toFixed(2)}</td>
+          <td><span class="tag ${row.patch_reading}">${row.patch_reading}</span></td>
+        </tr>
+      `).join('');
+      new Chart(document.getElementById('migrationChart'), {
+        type: 'bar',
+        data: {
+          labels: migration.slice(0, 8).map(row => `${row.before_comp_name} -> ${row.after_comp_name}`),
+          datasets: [{ label: '玩家数', data: migration.slice(0, 8).map(row => Number(row.player_cnt)), backgroundColor: '#d98a10' }]
+        },
+        options: { indexAxis: 'y' }
+      });
+      document.querySelector('#unitTable tbody').innerHTML = unit.map(row => `
+        <tr>
+          <td>${row.unit_name}</td>
+          <td>${row.item_combo}</td>
+          <td>${Number(row.appear_cnt).toLocaleString('zh-CN')}</td>
+          <td>${pct(row.top4_rate)}</td>
+          <td>${pct(row.win_rate)}</td>
+          <td><span class="tag ${row.balance_flag === 'normal' ? 'watch' : row.balance_flag.includes('under') ? 'nerf_effective' : 'buff_effective'}">${row.balance_flag}</span></td>
+        </tr>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

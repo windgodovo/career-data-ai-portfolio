@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>金铲铲 Meta 阵容看板</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --line: #d9e1ee;
+      --text: #182032;
+      --muted: #667085;
+      --blue: #2f6fed;
+      --green: #1f9d68;
+      --amber: #d98a10;
+      --red: #d64545;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+    header { padding: 20px 28px 12px; border-bottom: 1px solid var(--line); background: var(--panel); }
+    h1 { margin: 0; font-size: 22px; letter-spacing: 0; }
+    .sub { margin-top: 6px; color: var(--muted); font-size: 13px; }
+    main { padding: 20px 28px 28px; display: grid; gap: 18px; }
+    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .kpi, .section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+    .kpi .label { color: var(--muted); font-size: 12px; }
+    .kpi .value { font-size: 24px; font-weight: 700; margin-top: 6px; }
+    .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; align-items: start; }
+    .section h2 { margin: 0 0 12px; font-size: 16px; }
+    canvas { width: 100%; height: 340px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+    th { color: var(--muted); font-weight: 600; }
+    .tag { display: inline-block; padding: 2px 7px; border-radius: 999px; font-size: 12px; border: 1px solid var(--line); }
+    .overpowered { color: var(--red); background: #fff1f1; border-color: #f4b8b8; }
+    .hidden_strong { color: var(--green); background: #eaf8f0; border-color: #a9dfc1; }
+    .underpowered { color: var(--amber); background: #fff7e8; border-color: #eed092; }
+    .normal { color: var(--muted); background: #f8fafc; }
+    @media (max-width: 900px) { .kpis, .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>金铲铲 Meta 阵容看板</h1>
+    <div class="sub">参考阵容榜常见口径：样本量、登顶占比、前四占比、出场率、平均名次、强弱标签。</div>
+  </header>
+  <main>
+    <section class="kpis">
+      <div class="kpi"><div class="label">当前版本</div><div class="value" id="patch">-</div></div>
+      <div class="kpi"><div class="label">分析阵容数</div><div class="value" id="compCnt">-</div></div>
+      <div class="kpi"><div class="label">样本对局</div><div class="value" id="playCnt">-</div></div>
+      <div class="kpi"><div class="label">最高登顶占比</div><div class="value" id="maxWinShare">-</div></div>
+    </section>
+    <section class="grid">
+      <div class="section">
+        <h2>登顶占比 / 前四占比</h2>
+        <canvas id="shareChart"></canvas>
+      </div>
+      <div class="section">
+        <h2>阵容强弱标签</h2>
+        <table id="metaTable">
+          <thead><tr><th>阵容</th><th>Tier</th><th>出场率</th><th>前四率</th><th>登顶率</th><th>标签</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="section">
+      <h2>阵容平均名次与出场率</h2>
+      <canvas id="scatterChart"></canvas>
+    </section>
+  </main>
+  <script>
+    const csvUrl = '../data/output/comp_meta_summary.csv';
+    const parseCsv = text => {
+      const lines = text.trim().split(/\r?\n/);
+      const headers = lines.shift().split(',');
+      return lines.map(line => {
+        const values = line.split(',');
+        return Object.fromEntries(headers.map((h, i) => [h, values[i]]));
+      });
+    };
+    const pct = value => `${(Number(value) * 100).toFixed(1)}%`;
+    const num = value => Number(value).toLocaleString('zh-CN');
+
+    fetch(csvUrl).then(r => r.text()).then(text => {
+      const data = parseCsv(text);
+      document.getElementById('patch').textContent = data[0].patch_version;
+      document.getElementById('compCnt').textContent = data.length;
+      document.getElementById('playCnt').textContent = num(data.reduce((sum, row) => sum + Number(row.play_cnt), 0));
+      document.getElementById('maxWinShare').textContent = pct(Math.max(...data.map(row => Number(row.win_share))));
+
+      const labels = data.map(row => row.comp_name);
+      new Chart(document.getElementById('shareChart'), {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: '登顶占比', data: data.map(row => Number(row.win_share)), backgroundColor: '#2f6fed' },
+            { label: '前四占比', data: data.map(row => Number(row.top4_share)), backgroundColor: '#1f9d68' }
+          ]
+        },
+        options: { responsive: true, scales: { y: { ticks: { callback: v => `${(v * 100).toFixed(0)}%` } } } }
+      });
+
+      new Chart(document.getElementById('scatterChart'), {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: '阵容',
+            data: data.map(row => ({ x: Number(row.pick_rate), y: Number(row.avg_rank), label: row.comp_name })),
+            backgroundColor: '#d98a10',
+            pointRadius: 6
+          }]
+        },
+        options: {
+          plugins: { tooltip: { callbacks: { label: ctx => `${ctx.raw.label}: 出场率 ${pct(ctx.raw.x)}, 平均名次 ${ctx.raw.y.toFixed(2)}` } } },
+          scales: { x: { title: { display: true, text: '出场率' }, ticks: { callback: v => `${(v * 100).toFixed(0)}%` } }, y: { reverse: true, title: { display: true, text: '平均名次（越低越好）' } } }
+        }
+      });
+
+      const tbody = document.querySelector('#metaTable tbody');
+      tbody.innerHTML = data.map(row => `
+        <tr>
+          <td>${row.comp_name}</td>
+          <td>${row.tier}</td>
+          <td>${pct(row.pick_rate)}</td>
+          <td>${pct(row.top4_rate)}</td>
+          <td>${pct(row.win_rate)}</td>
+          <td><span class="tag ${row.meta_flag}">${row.meta_flag}</span></td>
+        </tr>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

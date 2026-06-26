@@ -1,0 +1,54 @@
+rules:
+  - rule_id: CUST_001
+    name: 客户主键不能为空
+    table: dwd.dim_customer
+    check: customer_id IS NOT NULL
+    severity: high
+
+  - rule_id: CUST_002
+    name: 客户手机号格式校验
+    table: dwd.dim_customer
+    check: phone IS NULL OR phone matches masked_or_valid_phone_pattern
+    severity: medium
+
+  - rule_id: ACCT_001
+    name: 账户必须能关联到客户
+    table: dwd.dim_account
+    check: customer_id exists in dwd.dim_customer
+    severity: high
+
+  - rule_id: TXN_001
+    name: 交易主键不能为空
+    table: dwd.fact_transaction
+    check: txn_id IS NOT NULL
+    severity: high
+
+  - rule_id: TXN_002
+    name: 交易金额不能为负
+    table: dwd.fact_transaction
+    check: amount >= 0
+    severity: high
+
+  - rule_id: TXN_003
+    name: 交易时间不能晚于当前批次时间
+    table: dwd.fact_transaction
+    check: txn_time <= batch_time
+    severity: medium
+
+  - rule_id: RISK_001
+    name: 风险评分范围校验
+    table: ads.customer_risk_score
+    check: risk_score between 0 and 100
+    severity: high
+
+  - rule_id: SEG_001
+    name: 每个客户必须有且只有一个分层标签
+    table: serving.customer_segment_result
+    check: one segment per customer_id
+    severity: medium
+
+  - rule_id: MON_001
+    name: 每日指标监控表不能为空
+    table: monitor.risk_metric_daily_report
+    check: row_count > 0
+    severity: high

@@ -1,0 +1,4 @@
+txn_id,customer_id,name,city,amount,txn_time,channel,txn_status,abnormal_reason,severity
+T0021,C011,Ma Ning,Shanghai,26000.0,2026-06-11 23:15:00,mobile,SUCCESS,high_frequency,medium
+T0020,C011,Ma Ning,Shanghai,24000.0,2026-06-11 23:08:00,mobile,SUCCESS,high_frequency,medium
+T0019,C011,Ma Ning,Shanghai,22000.0,2026-06-11 23:01:00,mobile,SUCCESS,high_frequency,medium

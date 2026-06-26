@@ -1,0 +1,5 @@
+check_item,check_result,detail
+ads.customer_risk_score range 0-100,PASS,0
+dwd.dim_account fk customer_id matched,PASS,0
+dwd.dim_customer customer_id not null,PASS,0
+dwd.fact_transaction amount >= 0,PASS,0

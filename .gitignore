@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.local
+
+# Local databases and generated heavy artifacts
+*.duckdb
+*.sqlite
+*.db
+**/data/chroma/
+
+# Logs and temp files
+*.log
+/tmp/
+.*.bkp
+*.bkp
+
+# Node
+node_modules/
+
+# Secrets
+*.pem
+*.key
+*.token

@@ -1,0 +1,7 @@
+room_id,host_id,room_type,duration_seconds,message_cnt,private_message_cnt,report_cnt,punished_user_cnt,minutes_to_first_punished_message
+R09,U009,voice_room,9000,9,9,6,3,5
+R04,U008,voice_room,4200,2,1,0,0,
+R03,U005,live,3600,4,2,2,2,8
+R12,U012,live,3000,1,0,0,0,
+R01,U003,live,5400,4,2,1,1,12
+R02,U003,voice_room,7200,4,2,1,1,10

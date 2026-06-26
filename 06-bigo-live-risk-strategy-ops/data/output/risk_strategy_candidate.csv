@@ -1,0 +1,8 @@
+user_id,strategy_name,account_age_hours,private_message_cnt,report_cnt_all,punish_cnt_all,device_user_cnt,ip_user_cnt,payment_amount_sum
+U002,manual_watchlist,557,2,1,1,1,1,99.0
+U004,manual_watchlist,531,2,1,1,1,2,129.0
+U005,manual_watchlist,511,0,1,1,1,1,199.0
+U006,manual_watchlist,511,2,1,1,1,1,199.0
+U009,device_cluster_review,427,3,2,2,3,3,1197.0
+U010,device_cluster_review,427,3,2,2,3,3,399.0
+U011,device_cluster_review,427,3,2,2,3,3,499.0

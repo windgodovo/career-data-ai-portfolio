@@ -1,0 +1,9 @@
+case_id,target_id,review_time,review_result,reviewer,appeal_result
+C008,U001,2026-06-23 10:30:00,normal,RV02,not_appealed
+C007,U005,2026-06-23 10:20:00,suspicious,RV02,overturned
+C006,U011,2026-06-21 12:00:00,violation,RV03,upheld
+C005,U010,2026-06-21 11:55:00,violation,RV03,upheld
+C004,U009,2026-06-21 11:50:00,violation,RV03,upheld
+C003,U006,2026-06-21 11:40:00,violation,RV01,upheld
+C002,U004,2026-06-21 11:35:00,violation,RV02,not_appealed
+C001,U002,2026-06-21 11:30:00,violation,RV01,not_appealed

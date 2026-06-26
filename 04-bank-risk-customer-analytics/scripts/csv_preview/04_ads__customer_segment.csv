@@ -1,0 +1,13 @@
+customer_id,txn_cnt_30d,txn_amount_30d,days_since_last_txn,balance,value_score,active_score,risk_score,risk_level,customer_segment
+C001,2,1286.5,12,86200.5,2.57,10.0,9.8,low,general_customer
+C002,2,60000.0,11,245600.0,100.0,10.0,48.83,medium,general_customer
+C003,3,20699.0,0,3200.2,41.4,15.0,47.04,medium,general_customer
+C004,2,100000.0,9,12800.0,100.0,10.0,77.56,high,high_value_high_risk
+C005,2,17300.0,7,560000.0,34.6,10.0,8.4,low,general_customer
+C006,2,5300.0,6,980.0,10.6,10.0,59.1,medium,general_customer
+C007,2,165000.0,5,420000.0,100.0,10.0,48.75,medium,general_customer
+C008,2,4020.0,4,73500.0,8.04,10.0,9.92,low,general_customer
+C009,1,9800.0,4,15400.0,19.6,5.0,47.57,medium,general_customer
+C010,1,5000.0,3,308000.0,10.0,5.0,5.25,low,general_customer
+C011,3,72000.0,3,18600.0,100.0,15.0,43.39,medium,general_customer
+C012,2,4000.0,1,99000.0,8.0,10.0,10.5,low,general_customer

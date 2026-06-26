@@ -1,0 +1,50 @@
+project: bank-risk-customer-analytics
+language: zh-CN
+
+business_domains:
+  customer:
+    owner: retail_banking_analytics
+    description: 客户基础信息、客户画像、客户分层标签
+  account:
+    owner: retail_banking_analytics
+    description: 账户状态、余额、账户类型
+  transaction:
+    owner: risk_analytics
+    description: 交易流水、渠道、金额、交易时间
+  credit:
+    owner: credit_risk
+    description: 授信额度、额度使用率、逾期记录
+
+sensitive_fields:
+  restricted:
+    - customer_id
+    - id_number
+    - phone
+    - address
+  sensitive:
+    - account_id
+    - balance
+    - credit_limit
+    - used_credit
+    - overdue_amount
+
+masking_rules:
+  phone: 保留前三位和后四位，中间脱敏
+  id_number: 仅保留后四位
+  account_id: 展示哈希或后四位
+
+access_control:
+  analyst:
+    allow: [aggregated_metrics, masked_customer_profile]
+    deny: [raw_id_number, raw_phone]
+  risk_manager:
+    allow: [risk_score, abnormal_txn_detail, masked_customer_profile]
+    deny: [raw_id_number]
+  data_engineer:
+    allow: [pipeline_tables, quality_reports, lineage_docs]
+    deny: [raw_sensitive_export]
+
+data_retention:
+  transaction_detail: 5 years
+  risk_metric_daily: 3 years
+  quality_report: 1 year

@@ -1,0 +1,5 @@
+metric_date,risk_type,punish_cnt,ban_cnt,mute_cnt,warning_cnt
+2026-06-23,scam,1,0,0,1
+2026-06-21,inducement,4,2,1,1
+2026-06-22,fraud,3,1,2,0
+2026-06-21,fraud,2,1,1,0
